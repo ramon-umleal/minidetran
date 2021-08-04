@@ -9,13 +9,21 @@
 </div>
     {% include "footer.html" %}
     {% include "condutor.html" %}
-    {% include "veiculo.html" %}
     
 
 </div>
 
 {% endblock %}
 
+{% block body1 %}
+
+</div>
+   
+    {% include "veiculo.html" %}
+    
+</div>
+
+{% endblock %}
 
 <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
 <script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
