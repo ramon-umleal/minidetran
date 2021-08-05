@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, sessions, url_for, flash
 from flask_mysqldb import MySQL
-
+from tkinter import *
 
 
 app = Flask(__name__)
@@ -74,53 +74,58 @@ def update():
         mysql.connection.commit()
         return redirect(url_for('Index'))
 
-if __name__ == "__main__":
-    app.run(debug=True)
+##if __name__ == "__main__":
+##    app.run(debug=True)
+#################################veiculo
 
 
-@app.route('/insertv', methods = ['POST'])
-def insert():
+@app.route('/veiculoinsert', methods = ['POST',])
+def veiculoinsert():
 
     if request.method == "POST":
         flash("Veiculo cadastrado com Sucesso!!") # quando adciona corretamente no banco 
-        id_condutor = request.form['id_condutor']
-        name = request.form['nome']
-        telefone = request.form['telefone']
-        cnh = request.form['cnh']
-        email = request.form['email']
+        id_veiculo = request.form['id_veiculo']
+        ano = request.form['ano']
+        ano_modelo = request.form['ano_modelo']
+        fabricante = request.form['fabricante']
+        modelo = request.form['modelo']
+        renavan = request.form['renavan']
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO condutor (id_condutor, nome, telefone, cnh, email) VALUES (%s, %s, %s, %s, %s)", (id_condutor, name, telefone, cnh, email))
+        cur.execute("INSERT INTO veiculo (id_veiculo, ano, ano_modelo, fabricante, modelo, renavan) VALUES (%s, %s, %s, %s, %s, %s)", (id_veiculo, ano, ano_modelo, fabricante, modelo, renavan))
         mysql.connection.commit()
         return redirect(url_for('Index'))
 
 
-@app.route('/delete/<string:id_data>', methods = ['GET'])
-def delete(id_data):
-    flash("Condutor Deletado com Sucesso!!")
+@app.route('/deletev/<string:id_data>', methods = ['GET'])
+def deletev(id_data):
+    flash("Veiculo deletado com Sucesso!!")
     cur = mysql.connection.cursor()
-    cur.execute("DELETE FROM condutor WHERE id_condutor=%s", (id_data,))
+    cur.execute("DELETE FROM veiculo WHERE id_veiculo=%s", (id_data,))
     mysql.connection.commit()
     return redirect(url_for('Index'))
 
 
-@app.route('/update',methods=['POST','GET'])
-def update():
+@app.route('/updatev',methods=['POST','GET'])
+def updatev():
 
     if request.method == 'POST':
+        id_veiculo = request.form['id_veiculo']
+        ano = request.form['ano']
+        ano_modelo = request.form['ano_modelo']
+        fabricante = request.form['fabricante']
+        modelo = request.form['modelo']
+        renavan = request.form['renavan']
         id_condutor = request.form['id_condutor']
-        nome = request.form['nome']
-        telefone = request.form['telefone']
-        cnh = request.form['cnh']
-        email = request.form['email']
         cur = mysql.connection.cursor()
         cur.execute("""
-               UPDATE condutor
-               SET id_condutor=%s, nome=%s, telefone=%s, cnh=%s, email=%s, 
-               WHERE id_condutor=%s
-            """, (id_condutor, nome, telefone, cnh, email))
-        flash("Condutor atualizado com Sucesso!!")
+               UPDATE veiculo
+               SET id_veiculo=%s, ano=%s, ano_modelo=%s, fabricante=%s, modelo=%s, renavan=%s, id_condutor=%s 
+               WHERE id_veiculo=%s
+            """, (id_veiculo, ano, ano_modelo, fabricante, modelo, renavan, id_condutor))
+        flash("Veiculo atualizado com Sucesso!!")
         mysql.connection.commit()
         return redirect(url_for('Index'))
+
 
 if __name__ == "__main__":
     app.run(debug=True)

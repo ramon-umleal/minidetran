@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col md-12">
-            <h2>lista de Veiculos <button type="button" class="btn btn-success  pull-right" data-toggle="modal" data-target="#myModal">Adcionar novo veiculo</button></h2>
+            <h2>lista de Veiculos <button type="button" class="btn btn-success  pull-right" data-toggle="modal" data-target="#myModalv">Adcionar novo veiculo</button></h2>
 
     {%with messages = get_flashed_messages()%}
 
@@ -55,11 +55,11 @@
                         
                     
                                 <td>
-                                <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Editar</a>
+                                <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaleditv{{row.0}}">Editar</a>
                                 <a href="/delete/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('pode deletar mesmo?')">Deletar</a>
                                 </td>
                                 </tr>
-                  <div id="modaledit{{row.0}}" class="modal fade" role="dialog"> #chama o modal
+                  <div id="modaleditv{{row.0}}" class="modal fade" role="dialog"> #chama o modal
                      <div class="modal-dialog">
                         <div class="modal-content">
 
@@ -69,7 +69,7 @@
                               <h4 class="modal-title">Atualizar veiculo</h4>
                            </div>
 
-                           <div class="modal-body"> <!-- Atualizar Condutor corpo do modal com nome telefne cnh, separado dor div cada atributo-->
+                           <div class="modal-body"> <!-- Atualizar veiculoo-->
 
                               <form action="{{ url_for('update') }}" method="POST">
 
@@ -80,12 +80,12 @@
                                  </div>
 
                                  <div class="form-group">
-                                    <label>ANO:</label>
+                                    <label>Ano do veiculo:</label>
                                     <input type="hidden"  name="ano" value="{{row.1}}">
                                     <input type="text" class="form-control" name="ano" value="{{row.1}}">
                                  </div>
                                  <div class="form-group">
-                                    <label>Ano_modelo:</label>
+                                    <label>Ano/modelo:</label>
                                     <input type="hidden"  name="ano_modelo" value="{{row.2}}">
                                     <input type="text" class="form-control" name="ano_modelo" value="{{row.2}}">
                                  </div>
@@ -98,13 +98,13 @@
                                     <input type="text" class="form-control" name="modelo" value="{{row.4}}">
                                  </div>
                                  <div class="form-group">
-                                    <label>Modelo do renavan:</label>
+                                    <label>Numero do renavan:</label>
                                     <input type="text" class="form-control" name="renavan" value="{{row.5}}">
                                  </div>
-                                 <div class="form-group">
+                               <!--  <div class="form-group">
                                     <label>ID CONDUTOR:</label>
                                     <input type="text" class="form-control" name="id_condutor" value="{{row.6}}">
-                                 </div>
+                                 </div>-->
 
                                  <div class="form-group">
                                     <button class="btn btn-primary" type="sbumit">Atualiazar Registro</button>
@@ -140,7 +140,7 @@
 <!-- Modal -->
 
 
-<div id="myModal" class="modal fade" role="dialog">
+<div id="myModalv" class="modal fade" role="dialog">
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
@@ -148,7 +148,7 @@
             <h4 class="modal-title">Adicionar novo veiculo</h4>
          </div>
          <div class="modal-body">
-            <form action="{{ url_for('insert') }}" method="POST">
+            <form action="{{ url_for('veiculoinsert') }}" method="POST">
               
                <div class="form-group">
                   <label>ID_VEICULO:</label>
@@ -160,29 +160,28 @@
                   <input type="text" class="form-control" name="ano" required="1">
                </div>
                <div class="form-group">
-                  <label>Ano_modelo:</label>
+                  <label>Ano/modelo:</label>
                   <input type="text" class="form-control" name="ano_modelo" required="1">
                </div>
                <div class="form-group">
-                  <label>Nomo Fabricante:</label>
+                  <label>Nome Fabricante:</label>
                   <input type="text" class="form-control" name="fabricante" required="1">
                </div>
                 <div class="form-group">
-                  <label>Modelo:</label>
+                  <label>Modelo do veiculo:</label>
                   <input type="text" class="form-control" name="modelo" required="1">
                </div>
                <div class="form-group">
-                <label>Renavan:</label>
+                <label>Renavan do veiculo:</label>
                 <input type="text" class="form-control" name="renavan" required="1">
                 </div>
-                <div class="form-group">
+               <div class="form-group">
                     <label>Id_Condutor:</label>
                     <input type="text" class="form-control" name="id_veiculo" required="1">
                  </div>
 
-
                <div class="form-group">
-                  <button class="btn btn-primary" type="submit">Adcionar</button>
+                  <button class="btn btn-primary" type="submit">Adicionar</button>
                </div>
             </form>
          </div>
